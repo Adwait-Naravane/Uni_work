@@ -1,11 +1,19 @@
 #include <stdio.h>
+#include <math.h>
 
-int main() {
-   int i;
+double f(double x){
+   return pow(x,2) + 3*x;
+}
+double derive(double (*f)(double), double x0){
+   const double delta = 1.0e-6;
+    double x1 = x0 - delta;
+    double x2 = x0 + delta;
+    double y1 = f(x1);
+    double y2 = f(x2);
+   return (y2-y1)/(x2-x1);
+}
 
-  for (i = 11; i > 1; i =i - 2){
-    printf("%d ", i);
-  }
-
-  return 0;
+int main(){
+   printf("%f",derive(f, 1.0));
+   return 0;
 }
