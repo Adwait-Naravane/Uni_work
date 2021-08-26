@@ -16,15 +16,14 @@ def output(Q, N, w, time):
     w = 2 * np.pi * w
     sig = np.zeros_like(time)
     for i in range(len(time)):
-        for j in range(N):
-            k = 2 * j + 1
-            sig[i] += amp(Q, k * w) * (4 / (k * np.pi)) * np.sin(w * k * time[i] + phase(Q, k * w))
+      k = 2* np.array(range(N)) + 1
+      sig[i] = np.sum(amp(Q, k * w) * (4 / (k * np.pi)) * np.sin(w * k * time[i] + phase(Q, k * w)))
     return sig
-
+#wish I could vectorise more
 
 f = [2000, 1800, 1600, 900, 450, 200]
 qf = [5, 1]
-a, b = 0, 5
+a, b = 0, 0
 t = np.linspace(0, 8/f[b], 1000)  
 output = output(qf[a], 1000, f[b], t)
 plt.title(f"Q = {qf[a]} & $\omega$ = {f[b]} Hz")
