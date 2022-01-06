@@ -16,7 +16,7 @@
 *.lo
 *.o
 *.obj
-
+*.txt
 # Precompiled Headers
 *.gch
 *.pch
@@ -43,3 +43,4 @@
 *.csv
 *.xlsx
 *.zip
+Autumn-2021/PH3105-Nuclear lab/pc.txt
