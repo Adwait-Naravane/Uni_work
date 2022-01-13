@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt 
 
+#obtained from wiki
 x_N = {
     2 : (-1/(3**0.5), 1/(3**0.5)),
     3 : (-((3/5)**0.5), 0, (3/5)**0.5),
@@ -32,5 +33,5 @@ for i in n:
 
 plt.plot(n, error, '-o')
 plt.xlabel("n values")
-plt.ylabel("error values")
+plt.ylabel("error")
 plt.show()
