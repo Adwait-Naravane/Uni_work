@@ -1,0 +1,28 @@
+import numpy as np
+import matplotlib.pyplot as plt 
+
+dxs = [10**(-1-i) for i in range(6)]
+
+def integral(a,b,dx):
+  x = np.arange(a,b,dx)
+  f = np.exp(-x**2)
+  #simpson rule
+  A = (dx/3)*(f[0] + f[-1] + 4*np.sum(f[1:-1:2]) + 2*np.sum(f[2:-1:2]))
+  return A
+
+print(integral(-1,1,0.001))
+
+ints = [integral(-1,1,dx) for dx in dxs]
+
+#we shall choose the value below as the exact one. it's obtained by taking dx = 0.0000001
+actual_val = 1.493648256911585
+
+error = [np.abs((inty - actual_val)/actual_val) for inty in ints]
+
+plt.scatter(dxs,error)
+plt.plot(dxs, error)
+plt.xlabel('dx spacings (log scale)')
+plt.ylabel('error (log scale)')
+plt.xscale('log')
+plt.yscale('log')
+plt.show()
