@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 la = 1
 f = lambda x: -x - la*(x**3) 
 
+#velo verlet algo
 def verlet(initial, dx, a, b):
   t = np.arange(a,b,dx)
   r = []
