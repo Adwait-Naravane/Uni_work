@@ -49,3 +49,8 @@ plt.xlabel('position')
 plt.ylabel('velocity')
 plt.legend()
 '''
+
+'''
+The error increases with O(h^3) as we can see in part a
+In part b, we see that the configuration space diagram moves from a circle at lambda = 0 (harmonic oscillator) to an ellipse in the anharmonic case. 
+'''
