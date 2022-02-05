@@ -19,6 +19,18 @@ def rk4(initial, f, a, b ,dx):
     lis.append(lis[i] + dx*(k1 + 2*k2 + 2*k3 + k4)/6)
   return np.array(lis)
 
+'''
+def euler(initial, f, a, b, dx):
+    t = np.arange(a,b,dx)
+    lis = []
+    lis.append(initial)
+    for i in range(len(t) - 1):
+        lis.append(lis[i] + dx*f(lis[i]))
+    return np.array(lis)
+
+ #Uncomment it to use   
+
+'''
 
 def rho(x, t):
   D = (dx**2)/(2* dt)
@@ -34,6 +46,8 @@ def g(state):
 
 state0 = rho(pos, 1)
 states = rk4(state0, g, 1, 20, dt)
+#states = euler(state0, g, 1, 20, dt)
+
 
 plt.plot(pos, states[0], color = 'black', label = 't = 1s')
 plt.plot(pos, states[1800], color = 'r', label = 't = 19s')
