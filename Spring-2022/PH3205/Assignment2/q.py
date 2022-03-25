@@ -1,18 +1,17 @@
 import numpy as np
 import matplotlib.pyplot as plt
-E = 200* (10**(9))
-I = 30000 * ((1/100)**4)
-w = 1500000
-L = 3
 
-f = lambda t,x,z: ((w*L)/(2*E*I)) * t - ((w)/(2*E*I)) * (t**2)
+L = 4
+g = 9.81
+
+f = lambda t,x,z: -g*x/x
 
 
 def rk4(initial, dx, a, b):
   t = np.arange(a,b, dx)
   x = []
   x.append(initial)
-  for i in range(len(t)):
+  for i in range(len(t)-1):
     k1 = x[i][1]
     l1 = f(t[i], x[i][0], x[i][1])   
     k2 = k1 + l1*dx/2
@@ -24,14 +23,14 @@ def rk4(initial, dx, a, b):
     y = x[i][0] + (1/6)*dx*(k1 + 2*(k2 + k3) + k4)
     z = x[i][1] + (1/6)*dx*(l1 + 2*(l2 + l3) + l4)
     x.append(np.array([y,z]))
-  return x
+  return t, x
 
-y0 = 0
+y0 = 30
 yL = 0
 
 def func(guess):
   initial = np.array([y0, guess])
-  stuff = rk4(initial, 0.0001, 0, L)
+  t, stuff = rk4(initial, 0.0001, 0, L)
   position = [stuff[i][0] for i in range(len(stuff))]
   return position[-1]
 
@@ -42,7 +41,7 @@ def bisection(a,b):
         return
   
     c = a
-    while (abs(b-a) >= 0.00001):
+    while (abs(b-a) >= 0.001):
  
         # Find middle point
         c = (a+b)/2
@@ -59,16 +58,17 @@ def bisection(a,b):
              
     return c
 
-best_guess = bisection(0,-0.1)
+best_guess = bisection(100,-100)
 print(best_guess)
 
 initial = np.array([y0, best_guess])
-stuff = rk4(initial, 0.0001, 0, L)
+t, stuff = rk4(initial, 0.001, 0, L)
 position = [stuff[i][0] for i in range(len(stuff))]
 
-t = np.arange(0,L+0.0001, 0.0001)
+#t = np.arange(0,L+0.001, 0.001)
 plt.plot(t, position)
-plt.xlabel('x')
+plt.xlabel('t')
 plt.title("best guess plot")
 plt.ylabel('y')
 plt.show()
+plt.savefig('projectile.png')
