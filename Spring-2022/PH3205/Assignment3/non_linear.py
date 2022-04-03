@@ -1,10 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-L = 4
-g = 9.81
+L = 1
 
-f = lambda t,x,z: -g*x/x
+f = lambda x,y,z: y**2 + np.cos(2*np.pi*x) - np.sin(np.pi*x)**4 + z - z
 
 
 def rk4(initial, dx, a, b):
@@ -25,7 +24,7 @@ def rk4(initial, dx, a, b):
     x.append(np.array([y,z]))
   return t, x
 
-y0 = 30
+y0 = 0
 yL = 0
 
 def func(guess):
@@ -57,8 +56,8 @@ def bisection(a,b):
             a = c
              
     return c
-
-best_guess = bisection(100,-100)
+print('There are actually 2 solutions , 0.18 and -33.57. This is one of them')
+best_guess = bisection(-40,-30)
 print(best_guess)
 
 initial = np.array([y0, best_guess])
@@ -67,8 +66,19 @@ position = [stuff[i][0] for i in range(len(stuff))]
 
 #t = np.arange(0,L+0.001, 0.001)
 plt.plot(t, position)
-plt.xlabel('t')
+plt.xlabel('x')
 plt.title("best guess plot")
 plt.ylabel('y')
-plt.savefig('projectile.png')
+plt.savefig('non_linear.png')
 plt.show()
+
+'''
+#To display those two solutions, you can see the curve crosses 0 two times. 
+guesses = np.arange(-100, 10, 1)
+poslast = [func(guess) for guess in guesses]
+plt.plot(guesses, poslast)
+plt.xlabel('derivative at x = 0')
+plt.ylabel('y(1)')
+plt.grid()
+plt.show()
+'''
