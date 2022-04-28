@@ -29,7 +29,7 @@ yL = 0
 
 def func(guess):
   initial = np.array([y0, guess])
-  t, stuff = rk4(initial, 0.0001, 0, L)
+  t, stuff = rk4(initial, 0.001, 0, L)
   position = [stuff[i][0] for i in range(len(stuff))]
   return position[-1]
 
@@ -56,7 +56,7 @@ def bisection(a,b):
             a = c
              
     return c
-print('There are actually 2 solutions , 0.18 and -33.57. This is one of them')
+#print('There are actually 2 solutions , 0.18 and -33.57. This is one of them')
 best_guess = bisection(-40,-30)
 print(best_guess)
 
